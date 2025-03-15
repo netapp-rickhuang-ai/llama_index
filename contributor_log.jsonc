@@ -1,0 +1,115 @@
+{
+  "issues": [
+    {
+      "id": 2345041492,
+      "title": "What \"Branch protection policy\" wasn't satisfied?",
+      "url": "https://github.com/NVIDIA/spark-rapids-ml/issues/666",
+      "state": "closed",
+      "created_time": "2024-06-10",
+      "closed_time": "2024-06-10",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 2024376751,
+      "title": "netapp-rickhuang-ai - agree to code of conduct",
+      "url": "https://github.com/NetAppDocs/docs-help/issues/1419",
+      "state": "closed",
+      "created_time": "2023-12-04",
+      "closed_time": "2023-12-05",
+      "author": "netapp-rickhuang-ai"
+    }
+  ],
+  "pull_requests": [
+    {
+      "id": 2534940140,
+      "title": "Jhub mlflow dotk r huang",
+      "url": "https://github.com/NetAppDocs/netapp-solutions/pull/610",
+      "state": "closed",
+      "created_time": "2024-09-18",
+      "closed_time": "2024-09-19",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 2529668090,
+      "title": "Jhub mlflow dotk finetune (Rick's part only.)",
+      "url": "https://github.com/NetAppDocs/netapp-solutions-internal/pull/655",
+      "state": "closed",
+      "created_time": "2024-09-16",
+      "closed_time": "2024-09-17",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 2345020214,
+      "title": "Adding GCP DocumentAI to umap Jupyter NB: init",
+      "url": "https://github.com/NVIDIA/spark-rapids-ml/pull/665",
+      "state": "closed",
+      "created_time": "2024-06-10",
+      "closed_time": "2024-06-10",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 2332827687,
+      "title": "Update apache-spark-use-cases-summary.adoc",
+      "url": "https://github.com/NetAppDocs/netapp-solutions/pull/559",
+      "state": "closed",
+      "created_time": "2024-06-04",
+      "closed_time": "2024-06-04",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 2328720867,
+      "title": "Update apache-spark-use-cases-summary.adoc",
+      "url": "https://github.com/NetAppDocs/netapp-solutions-internal/pull/592",
+      "state": "closed",
+      "created_time": "2024-05-31",
+      "closed_time": "2024-06-03",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 2245813470,
+      "title": "Merge main to MohanA",
+      "url": "https://github.com/netapp-rickhuang-ai/nvaie-spark-nlp-RAPIDS-CuDL/pull/2",
+      "state": "closed",
+      "created_time": "2024-04-16",
+      "closed_time": "2024-04-16",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 2245809158,
+      "title": "Create README.md",
+      "url": "https://github.com/netapp-rickhuang-ai/nvaie-spark-nlp-RAPIDS-CuDL/pull/1",
+      "state": "closed",
+      "created_time": "2024-04-16",
+      "closed_time": "2024-04-16",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 1511989480,
+      "title": "Update README",
+      "url": "https://github.com/tappinganalytics/Contentcrawler/pull/7",
+      "state": "closed",
+      "created_time": "2022-12-27",
+      "closed_time": "2022-12-27",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 1511979540,
+      "title": "2022-12-27 add logos",
+      "url": "https://github.com/tappinganalytics/Contentcrawler/pull/6",
+      "state": "closed",
+      "created_time": "2022-12-27",
+      "closed_time": "2022-12-27",
+      "author": "netapp-rickhuang-ai"
+    },
+    {
+      "id": 1511976451,
+      "title": "update README",
+      "url": "https://github.com/tappinganalytics/Contentcrawler/pull/5",
+      "state": "closed",
+      "created_time": "2022-12-27",
+      "closed_time": "2022-12-27",
+      "author": "netapp-rickhuang-ai"
+    }
+  ],
+  "notes": "API responses are limited to 10 results, but there are 17 results in total. You do not have data about the remaining 7 results. You can view more results [here](https://github.com/search?q=author:netapp-rickhuang-ai+is:pr&sort=updated&order=desc)."
+}
