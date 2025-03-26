@@ -4,8 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+# Note: pylance is primarily a VS Code extension, not a Python package
+# You may want to replace this with actual required packages for llama_index
 
 [dev-packages]
 
 [requires]
-python_version = "3.13"
+python_version = "3.12"
