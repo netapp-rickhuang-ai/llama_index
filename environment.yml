@@ -1,0 +1,10 @@
+name: llama-index
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - numpy
+  - pyarrow
+  - pip
+  - pip:
+      - pylance  # Verify if this is required
