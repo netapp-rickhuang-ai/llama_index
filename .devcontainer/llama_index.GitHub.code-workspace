@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"terminal.integrated.allowChords": false,
+		"github.copilot.workspace.sync.showBannerOnIgnoredFile": false,
+		"github.copilot.workspace.sync.showBannerOnWarning": false,
+		"github.copilot.workspace.sync.showBannerWhenNotSyncing": false
+	}
+}
