@@ -63,20 +63,20 @@ async def test_workflow_run(workflow):
 async def test_workflow_run_step(workflow):
     handler = workflow.run(stepwise=True)
 
-    event = await handler.run_step()
-    assert isinstance(event, OneTestEvent)
+    events = await handler.run_step()
+    assert isinstance(events[0], OneTestEvent)
     assert not handler.is_done()
-    handler.ctx.send_event(event)
+    handler.ctx.send_event(events[0])
 
-    event = await handler.run_step()
-    assert isinstance(event, LastEvent)
+    events = await handler.run_step()
+    assert isinstance(events[0], LastEvent)
     assert not handler.is_done()
-    handler.ctx.send_event(event)
+    handler.ctx.send_event(events[0])
 
-    event = await handler.run_step()
-    assert isinstance(event, StopEvent)
+    events = await handler.run_step()
+    assert isinstance(events[0], StopEvent)
     assert not handler.is_done()
-    handler.ctx.send_event(event)
+    handler.ctx.send_event(events[0])
 
     event = await handler.run_step()
     assert event is None
@@ -93,10 +93,10 @@ async def test_workflow_run_step(workflow):
 async def test_workflow_cancelled_by_user(workflow):
     handler = workflow.run(stepwise=True)
 
-    event = await handler.run_step()
-    assert isinstance(event, OneTestEvent)
+    events = await handler.run_step()
+    assert isinstance(events[0], OneTestEvent)
     assert not handler.is_done()
-    handler.ctx.send_event(event)
+    handler.ctx.send_event(events[0])
 
     await handler.cancel_run()
     await asyncio.sleep(0.1)  # let workflow get cancelled
@@ -332,8 +332,8 @@ async def test_workflow_step_returning_bogus():
             return StopEvent(result="step2")
 
     workflow = TestWorkflow()
-    with pytest.warns(
-        UserWarning,
+    with pytest.raises(
+        WorkflowRuntimeError,
         match="Step function step1 returned str instead of an Event instance.",
     ):
         await workflow.run()
@@ -558,10 +558,10 @@ async def test_workflow_pickle():
 async def test_workflow_context_to_dict_mid_run(workflow):
     handler = workflow.run(stepwise=True)
 
-    event = await handler.run_step()
-    assert isinstance(event, OneTestEvent)
+    events = await handler.run_step()
+    assert isinstance(events[0], OneTestEvent)
     assert not handler.is_done()
-    handler.ctx.send_event(event)
+    handler.ctx.send_event(events[0])
 
     # get the context dict
     data = handler.ctx.to_dict()
@@ -575,20 +575,19 @@ async def test_workflow_context_to_dict_mid_run(workflow):
     )
 
     # run the second step
-    ev = await new_handler.run_step()
-    assert isinstance(ev, LastEvent)
+    events = await new_handler.run_step()
+    assert isinstance(events[0], LastEvent)
     assert not new_handler.is_done()
-    new_handler.ctx.send_event(ev)
+    new_handler.ctx.send_event(events[0])
 
     # run third step
-    ev = await new_handler.run_step()
-    assert isinstance(ev, StopEvent)
+    events = await new_handler.run_step()
+    assert isinstance(events[0], StopEvent)
     assert not new_handler.is_done()
-    new_handler.ctx.send_event(ev)
+    new_handler.ctx.send_event(events[0])
 
     # Let the workflow finish
-    ev = await new_handler.run_step()
-    assert ev is None
+    assert await new_handler.run_step() is None
 
     result = await new_handler
     assert new_handler.is_done()
@@ -797,6 +796,46 @@ async def test_custom_stop_event():
     assert wf._start_event_class == MyStart
     assert wf._stop_event_class == MyStop
     result: MyStop = await wf.run(query="foo")
+    assert result.outcome == "Workflow completed"
+
+    # ensure that streaming exits
+    handler = wf.run()
+    async for event in handler.stream_events():
+        await asyncio.sleep(0.1)
+
+    _ = await handler
+
+
+@pytest.mark.asyncio()
+async def test_workflow_stream_events_exits():
+    class CustomEventsWorkflow(Workflow):
+        @step
+        async def start_step(self, ev: MyStart) -> OneTestEvent:
+            return OneTestEvent()
+
+        @step
+        async def middle_step(self, ev: OneTestEvent) -> LastEvent:
+            return LastEvent()
+
+        @step
+        async def end_step(self, ev: LastEvent) -> MyStop:
+            return MyStop(outcome="Workflow completed")
+
+    wf = CustomEventsWorkflow()
+    handler = wf.run(query="foo")
+
+    async def _stream_events():
+        async for event in handler.stream_events():
+            continue
+
+        return await handler
+
+    stream_task = asyncio.create_task(_stream_events())
+
+    result = await asyncio.wait_for(
+        stream_task,
+        timeout=1,
+    )
     assert result.outcome == "Workflow completed"
 
 
