@@ -79,3 +79,19 @@ if hasattr(ai_msg_0, "response_metadata"):
     print(f"[OUTPUT] Eval Duration: {eval_duration_ms} ms")
 else:
     print("[ERROR] ai_msg_0 does not have 'response_metadata' attribute")
+
+# Plot durations
+durations = [total_duration_ms, load_duration_ms, eval_duration_ms]
+labels = ["Total Duration", "Load Duration", "Prompt Eval Duration"]
+
+plt.figure(figsize=(8, 6))
+plt.bar(labels, durations, color=["blue", "orange", "green"])
+plt.xlabel("Duration Type")
+plt.ylabel("Duration (ms)")
+plt.title("Response Durations in Milliseconds for fixed 'BOXER' prompt")
+
+# Combine both legends into one
+plt.legend([f"Model: {llm_0.model}"], loc="upper right", title="API: ChatOllama")
+
+plt.grid(axis="y", linestyle="--", alpha=0.7)
+plt.show()
